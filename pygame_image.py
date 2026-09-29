@@ -13,19 +13,30 @@ def main():
     bg2_img = pg.transform.flip(bg_img,True,False)#練習8背景（bg_img）を左右反転
     kk_img = pg.image.load("fig/3.png")#練習３　こうかとんsurface作成
     kk_img = pg.transform.flip(kk_img,True,False)#練習３こうかとん（kk_img）を左右反転
+    kk_rct = kk_img.get_rect()#練習１０ー1,2
+    kk_rct.center=300,200
     tmr = 0
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: return
         x=tmr
         x=tmr%3200#練習9背景のループ
+        key_list =pg.key.get_pressed()#練習１０－３
+        if key_list[pg.K_UP]:
+            kk_rct.move_ip((0,-1))
+        elif key_list[pg.K_DOWN]:
+            kk_rct.move_ip((0,1))
+        elif key_list[pg.K_LEFT]:
+            kk_rct.move_ip((-1,0))
+        elif key_list[pg.K_RIGHT]:
+            kk_rct.move_ip((1,0))
         screen.blit(bg_img, [-x, 0])#練習５背景画像を右から左
         screen.blit(bg2_img,[-x+1600,0]) #練習7背景画像surface貼り付け
         screen.blit(bg_img,[-x+3200,0]) #練習9背景画像surface貼り付け
-        screen.blit(kk_img,[300,200]) #練習４こうかとんsurface貼り付け
+        screen.blit(kk_img,kk_rct) #練習４こうかとんsurface貼り付け
         pg.display.update()
         tmr += 1        
-        clock.tick(2000)#練習6FPSを変更
+        clock.tick(200)#練習6FPSを変更
 
 
 if __name__ == "__main__":
