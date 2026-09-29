@@ -21,16 +21,18 @@ def main():
             if event.type == pg.QUIT: return
         x=tmr
         x=tmr%3200#練習9背景のループ
+        tate=0
+        yoko=-1
         key_list =pg.key.get_pressed()#練習１０－３
         if key_list[pg.K_UP]:
-            kk_rct.move_ip((0,-1))
+            tate+=-1
         elif key_list[pg.K_DOWN]:
-            kk_rct.move_ip((0,1))
+            tate+=1
         elif key_list[pg.K_LEFT]:
-            kk_rct.move_ip((-1,0))
+            yoko+=-1
         elif key_list[pg.K_RIGHT]:
-            kk_rct.move_ip((2,0))
-        kk_rct.move_ip((-1,0))
+            yoko+=1
+        kk_rct.move_ip((yoko,tate))
         screen.blit(bg_img, [-x, 0])#練習５背景画像を右から左
         screen.blit(bg2_img,[-x+1600,0]) #練習7背景画像surface貼り付け
         screen.blit(bg_img,[-x+3200,0]) #練習9背景画像surface貼り付け
